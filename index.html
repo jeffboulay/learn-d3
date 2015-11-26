@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Let's Learn D3.js</title>
+
+		<meta name="description" content="Jeff Boulay - Senior Creative Technologist">
+		<meta name="author" content="Jeff Boulay">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/jb-ct.css" id="theme">
+		<link rel="stylesheet" href="css/main.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1><img src="img/d3.png"></h1>
+					<h3>Lets Learn D3.js</h3>
+					<p>
+						<small>Created by Jeff Boulay / <a href="http://twitter.com/jeffboulay">@jeffboulay</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h1>Jeff Boulay</h1>
+					<ul>
+						<li>Senior Web Developer @ Dun &amp; Bradstreet</li>
+						<li>Resently moved from Boston</li>
+						<li>Previously worked @ Hill Holliday</li>
+					</ul>
+						
+					
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+					<h2>What is D3</h2>
+						<p>D3.js is a JavaScript library for manipulating documents based on data. D3 helps you bring data to life using HTML, SVG, and CSS. D3’s emphasis on web standards gives you the full capabilities of modern browsers without tying yourself to a proprietary framework, combining powerful visualization components and a data-driven approach to DOM manipulation.</p>
+					</section>
+					
+					<section>
+						<h2>What is D3.js good at?</h2>
+						<ul>
+							<li>Rich interactive data visualizations</li>
+							<li>Transforming the data from one state to another</li>
+							<li>Hard math to make everything work nice together</li>
+							<li>Flexible</li>
+							<li>Working with arrays and objects</li>
+						</ul>
+					</section>
+					<section>
+						<h2>So what is D3.js not so good at then?</h2>
+						<ul>
+							<li>Chart widget library</li>
+							<li>2d canvas visualizations</li>
+							<li>Web GL visualizations</li>
+							<li>Map library</li>
+							<li>Capatibility layer</li>
+							<li>SVG abstraction layer</li>
+						</ul>
+					</section>
+				</section>
+				
+				<section>
+					<section>
+						<h2>d3.js is a little like jQuery</h2>
+						<p>jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.</p>
+					</section>
+					<section>
+						<h2>Similarity to jQuery</h2>
+						<p>Let's have a look.</p>
+						<pre class="prettyprint html" style="font-size: 1em;"><code class="html">
+							d3.select('#foo')
+  							    .style('background', '#000')
+  							    .on('click', function() {})
+  							    .append('div');
+
+							$('#foo')
+  							    .css('background', '#000')
+  							    .click(function() {})
+  							    .append($('&ltdiv&gt;&lt;/div&gt;'));
+						</code></pre>
+					</section>
+					<section>
+						<h2>Pulling in Data</h2>
+						<pre class="prettyprint html" style="font-size: 1em;"><code class="html">
+							d3.json('foo.json',
+  							    function(err, data) { });
+
+							$.getJSON('foo.json',
+  							    function(data) { });
+						</code></pre>
+					</section>
+					<section>
+						<h3>That is just the simple bits though</h3>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h1>Back to the D3.js</h1>
+					</section>
+					<section>
+						<h2>Dynamic Properties</h2>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+							d3.selectAll("p")
+    							.data([4, 8, 15, 16, 23, 42])
+    							.style("font-size", function(d) { return d + "px"; });
+    					</code></pre>
+					</section>
+					<section>
+						<h2>Loading Data</h2>
+						<p>d3 allows for a wide array of formats that it able to work with. Downloads are done asynchronously. Because the data is only executed once we have it fully downloaded we need to break it up.</p>
+
+						<pre class="prettyprint javascript" style="font-size: .8em;"><code>
+								// 1. Code here runs first, before the download starts.
+								// this is where you setup the d3 object
+								d3.json("data.json", function(error, data) {
+								  // 3. Code here runs last, after the download finishes.
+								  // this is where you put your code to process the data
+								});
+
+								// 2. Code here runs second, while the file is downloading.
+								// this is a good location for methods that massage the data as well as event binding methods
+
+								function type(d) {
+								  d.value = +d.value; // coerce to number
+								  return d;
+								}
+							</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Joins in D3.js</h2>
+						<ul>
+							<li>Pairs an object and an element</li>
+							<li>Keeps track of new and old objects</li>
+							<li>Lets you animate differences between new &amp; old</li>
+						</ul>
+						
+					</section>
+					<section>
+						<h2>
+							Break up the the initial selection into the parts:
+						</h2>
+
+						<ul style="margin-top: 40px;">
+							<li>Updating nodes to modify</li>
+							<li>Entering nodes to add</li>
+							<li>Exiting nodes to remove</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Update</h2>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+						var p = d3.select("body").selectAll("p")
+    						.data([4, 8, 15, 16, 23, 42])
+    						.text(String);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Enter</h2>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+						p.enter().append("p")
+    						.text(String);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Exit</h2>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+						p.exit().remove();
+						</code></pre>
+					</section>
+					<section>
+						<h3>This is a key concept to grasp when dealing with creating an extensible data visualization component. This allow the the visualization to adapt to the input of new data and the removal of old data and maintain the relationship of the nodes that just change the values so that you can transition them to the new values.</h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+					<h2>Scales</h2>
+						<ul>
+							<li><strong class = "highlight">Input domain :</strong> what is the input (min and max)</li>
+							<li><strong class="highlight">Output range :</strong> what is the output of this transformation(destination)</li>
+						</ul>
+
+						<img src="img/scales.png">
+					</section>
+					<section>
+						<h2>Example Linear Scale</h2>
+						<p>So lets say you have a bar chart and you want the max height of the chart to be 420px you also want the graph show the top performing bar as 420px tall and scale all other bars to that scale. Here is how you would do this.</p>
+						<pre class="prettyprint javascript" style="font-size: .6em;"><code class="html">
+							var y = d3.scale.linear()
+    						    .domain([0, d3.max(data)])
+    						    .range([0, 420]);
+
+							d3.select(".chart")
+								    .selectAll("div")
+								    .data(data)
+								    .enter().append("div")
+								    .style(“height", function(d) { return y(d) + "px"; })
+								    .text(function(d) { return d; });
+						</code></pre>
+						<p>Note that this returns a function! This is now a helper function we can use to map our values from our domain to our range:</p>
+						<pre class="prettyprint javascript" style="font-size: .6em;"><code class="html">
+							y(10);
+							y(50);
+							y(100);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Example Ordinal Scale</h2>
+						<p>you can also do ordinal scales too as an example</p>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+							var risk = d3.scale.ordinal()
+    						    .domain(['low', 'moderate',  'high','severe'])
+    						    .range(['low-chart', 'moderate-chart', 'high-chart', 'severe-chart']);
+						</code></pre>
+						<p>rangeRoundBands is a D3 helper method to give even space and padding between elements in the domain</p>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+							var x = d3.scale.ordinal()    
+    						    .domain(data.map(function(d) { return d.name; }));
+    						    .rangeRoundBands([0, width], .1);
+						</code></pre>
+					</section>
+					<section>
+						<h2>Time Scales</h2>
+						<p>For time domains. This can also be used for axis labeling.</p>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+							var xScale = d3.time.scale()
+  							    .domain([new Date("01/01/2013"), new Date("30/12/2013")])
+  							    .range([0, 600]);
+							    xScale(new Date("06/31/2013")); //296.6346153846154
+						</code></pre>
+					</section>
+				</section>
+				<section>
+					<h2>Transformation not Representation</h2>
+					<p>D3 focuses on transforming data and maintaining the relationship while allowing for rich interaction. Because D3 uses web standards as new features become available you can use them immediately</p>
+				</section>
+				<section>
+						<h2>Transitions</h2>
+						<p>Transitions also follow transformation principal. So you are transitioning from the old value to the new value</p>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code class="html">
+							d3.select("body").transition()
+    						    .style("background-color", "black");
+						</code></pre>
+						<p>Or, to resize circles in a symbol map with a staggered delay:</p>
+						<pre class="prettyprint javascript" style="font-size: 1em;"><code>
+							d3.selectAll("circle").transition()
+    						    .duration(750)
+    						    .delay(function(d, i) { return i * 10; })
+    						    .attr("r", function(d) { return Math.sqrt(d * scale); });
+						</code></pre>
+				</section>
+				<section>
+					<h2>Dealing with Margins</h2>
+					<pre class="prettyprint javascript" style="font-size: 1em;"><code>
+							var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    						    width = 960 - margin.left - margin.right,
+    						    height = 500 - margin.top - margin.bottom;
+						</code></pre>
+				</section>
+				<section>
+					<h2>Axis</h2>
+					<p>D3 has some great helper methods for dealing with adding Axis to your graph</p>
+    				<pre class="prettyprint javascript" style="font-size: 1em;"><code>
+							var xAxis = d3.svg.axis()
+							    .scale(x)
+							    .orient("bottom");
+						</code></pre>
+						<!-- <a href="examples/axis.html" target="_blank">Examples</a> -->
+				</section>
+				<section>
+					<h2>Events</h2>
+					<p>Events are easy to apply in D3.</p>
+					<pre class="prettyprint javascript" style="font-size: 1em;"><code>
+							d3.select("#vis")
+							    .on("mouseover", function(d) {
+    						    // 'this' is the element
+    						    // 'd' is the datum associated with it
+    						    // to act on this element with d3, we have to
+    						    // reselect it:
+    						    d3.select(this).classed("selected", true);
+  							});
+						</code></pre>
+				</section>
+				<section>
+					<h2>Working with Arrays</h2>
+					<p>Working with Arrays - d3 has a huge collection of helper methods that help us transform our data so that it can then be visualized. Anything from grouping data, to reducing it, to easily applying transformations to each data element.</p>
+					<a href="https://github.com/mbostock/d3/wiki/Arrays">https://github.com/mbostock/d3/wiki/Arrays</a>
+				</section>
+				<section>
+					<h2><a href="examples/bubble-chart.html" target="_blank">Enough talk. Show me some code!</a></h2>
+				</section>
+				<section>
+				<section>
+					<h2>Even more D3</h2>
+					<p>We can't possibly cover all aspects of d3 here, but there are some additional elements of it that are incredibly useful:</p>
+<img src="img/examples.png">
+				</section>
+				<section>
+				<h2>Even more D3</h2>
+					<ul>
+						<li>Colors - d3 comes with a collection of color transformation methods that easily let us compute color ranges, gradients, lighter/darker colors in RGP, HSL and LAB.</li>
+
+<li>Pre-existing components - while there aren't many bre-baked components in d3, there is an axis component that is easy to customize.</li>
+
+<li>Mapping - there are a lot of facilities in d3 to easily create maps of different projections</li>
+
+<li>Behaviors - supporting zooming/panning/dragging in d3 can be a matter of a few lines of code.</li>
+					</ul>
+				</section>
+				</section>
+				<section>
+					<h2>Thanks</h2>
+					<p>Resources</p>
+					<ul>
+						<li><a href="http://d3js.org/">http://d3js.org/</a></li>
+						<li><a href="https://square.github.io/intro-to-d3/">https://square.github.io/intro-to-d3/</a></li>
+						<li><a href="https://github.com/mbostock/d3/wiki/Gallery">https://github.com/mbostock/d3/wiki/Gallery</a></li>
+						<li><a href="http://alignedleft.com/tutorials/d3/">http://alignedleft.com/tutorials/d3/</a></li>
+					</ul>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+		        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+
+		<script type="text/javascript" src="js/main.js"></script>
+
+
+	</body>
+</html>

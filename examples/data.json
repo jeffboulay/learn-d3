@@ -1,0 +1,71 @@
+[{
+  "id":"1",
+  "name": "Taco Joint",
+  "type": "Tacos",
+  "rating": 4.7,
+  "comments": 700,
+  "pics": 93
+},{
+  "id":"2",
+  "name": "Tacodeli",
+  "type": "Tacos",
+  "rating": 4.6,
+  "comments": 480,
+  "pics": 63
+},{
+  "id":"3",
+  "name": "Mellizoz Tacos",
+  "type": "Tacos",
+  "rating": 4.5,
+  "comments": 650,
+  "pics": 93
+},{
+  "id":"4",
+  "name": "Fuzzy's Tacos",
+  "type": "Tacos",
+  "rating": 4.3,
+  "comments": 97,
+  "pics": 93
+},{
+  "id":"5",
+  "name": "Torchy's Tacos",
+  "type": "Tacos",
+  "rating": 4.0,
+  "comments": 553,
+  "pics": 93
+},{
+  "id":"6",
+  "name": "Franklin Barbecue",
+  "type": "Brisket",
+  "rating": 4.8,
+  "comments": 843,
+  "pics": 193
+},{
+  "id":"7",
+  "name": "La Barbecue",
+  "type": "Brisket",
+  "rating": 4.7,
+  "comments": 620,
+  "pics": 93
+},{
+  "id":"8",
+  "name": "Stiles Switch BBQ & Brew",
+  "type": "Brisket",
+  "rating": 4.6,
+  "comments": 700,
+  "pics": 93
+},{
+  "id":"9",
+  "name": "Freedmen’s",
+  "type": "Brisket",
+  "rating": 4.5,
+  "comments": 520,
+  "pics": 93
+},{
+  "id":"10",
+  "name": " Lamberts Downtown Barbecue",
+  "type": "Brisket",
+  "rating": 4.0,
+  "comments": 200,
+  "pics": 93
+}]
